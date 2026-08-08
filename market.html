@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect - Live Market Prices</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef8ee;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+margin-top:15px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.form-card{
+padding:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-bottom:20px;
+}
+
+button{
+width:100%;
+padding:14px;
+font-size:17px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.result{
+display:none;
+margin-top:25px;
+padding:20px;
+background:#f4fff4;
+border-left:5px solid green;
+border-radius:10px;
+}
+
+.result hr{
+margin:15px 0;
+}
+
+footer{
+margin-top:40px;
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💰 Live Market Prices</h1>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="weather.html">Weather</a>
+
+<a href="cropinfo.html">Crop Info</a>
+
+<a href="fertilizer.html">Fertilizer</a>
+
+<a href="schemes.html">Schemes</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="form-card">
+
+<h2>🔍 Search Crop</h2>
+
+<input
+type="text"
+id="cropSearch"
+placeholder="Enter Crop Name (Example: Tomato)">
+
+<button onclick="searchMarket()">
+🔍 Search Live Market
+</button>
+
+<button onclick="downloadMarketPDF()">
+📄 Download Market Report
+</button>
+
+<button onclick="resetMarket()">
+🔄 Reset
+</button>
+
+<div
+id="marketResult"
+class="result">
+
+<h2>Market Information</h2>
+
+<p>Search a crop to view Live Market Prices.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Live Agricultural Market Information System</p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="market.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect - Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌾 AgriConnect Login</h1>
+
+</header>
+
+<section class="hero">
+
+<div class="result">
+
+<h2>Farmer Login</h2>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email">
+
+<br><br>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<br><br>
+
+<button onclick="loginUser()">
+
+Login
+
+</button>
+
+<br><br>
+
+<p>
+
+Don't have an account?
+
+<a href="register.html">
+
+Register Here
+
+</a>
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Helping Farmers with Technology</p>
+
+</footer>
+
+<!-- Firebase SDK -->
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script>
+
+function loginUser(){
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+auth.signInWithEmailAndPassword(email,password)
+
+.then(function(){
+
+alert("Login Successful ✅");
+
+window.location.href="dashboard.html";
+
+})
+
+.catch(function(error){
+
+alert(error.message);
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

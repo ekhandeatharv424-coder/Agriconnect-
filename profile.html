@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmer Profile</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>👨‍🌾 Farmer Profile</h1>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="weather.html">Weather</a>
+
+<a href="cropinfo.html">Crop Info</a>
+
+<a href="fertilizer.html">Fertilizer</a>
+
+<a href="market.html">Market</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="form-card">
+
+<h2>👤 Farmer Information</h2>
+
+<h3>Farmer Photo</h3>
+
+<input
+type="file"
+id="photo"
+accept="image/*">
+
+<br><br>
+
+<img
+id="preview"
+src=""
+width="150"
+style="display:none;border-radius:50%;border:4px solid green;">
+
+<br><br>
+
+<input
+type="text"
+id="name"
+placeholder="Farmer Name">
+
+<input
+type="text"
+id="mobile"
+placeholder="Mobile Number">
+
+<input
+type="text"
+id="village"
+placeholder="Village">
+
+<input
+type="text"
+id="district"
+placeholder="District">
+
+<input
+type="text"
+id="state"
+placeholder="State">
+
+<input
+type="text"
+id="crop"
+placeholder="Main Crop">
+
+<br>
+
+<button onclick="saveProfile()">
+💾 Save Profile
+</button>
+
+<br><br>
+
+<button onclick="deleteProfile()">
+🗑 Delete Profile
+</button>
+
+<br><br>
+
+<button onclick="downloadProfilePDF()">
+📄 Download Profile PDF
+</button>
+
+<div
+id="profileResult"
+class="result">
+
+<h2>Saved Information</h2>
+
+<p>Profile not loaded.</p>
+
+</div>
+
+<br>
+
+<a href="dashboard.html">
+
+<button>
+
+⬅ Back To Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Farmer Profile Module</p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="profile.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vegetable Detection | AgriConnect</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef8ee;
+}
+
+header{
+background:#2E7D32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+margin-top:10px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
+.container{
+width:90%;
+max-width:900px;
+margin:30px auto;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.card h2{
+text-align:center;
+color:#2E7D32;
+}
+
+.upload-area{
+text-align:center;
+margin-top:20px;
+}
+
+.upload-area img{
+width:250px;
+height:250px;
+object-fit:cover;
+border:3px dashed green;
+border-radius:10px;
+padding:5px;
+}
+
+input[type=file]{
+margin-top:20px;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+background:#2E7D32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:17px;
+}
+
+button:hover{
+background:#1B5E20;
+}
+
+.result{
+display:none;
+margin-top:30px;
+background:#f4fff4;
+padding:20px;
+border-left:6px solid green;
+border-radius:10px;
+}
+
+.result h3{
+color:#2E7D32;
+}
+
+footer{
+margin-top:40px;
+background:#2E7D32;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📷 Vegetable Detection</h1>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="market.html">Market</a>
+
+<a href="cropinfo.html">Crop Info</a>
+
+<a href="weather.html">Weather</a>
+
+<a href="scheme.html">Schemes</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Upload Vegetable Image</h2>
+
+<div class="upload-area">
+
+<img
+id="preview"
+src="https://via.placeholder.com/250?text=Upload+Image">
+
+<br>
+
+<input
+type="file"
+id="imageInput"
+accept="image/*">
+
+<br>
+
+<button onclick="detectVegetable()">
+
+🔍 Detect Vegetable
+
+</button>
+
+<button onclick="downloadReport()">
+
+📄 Download Report
+
+</button>
+
+</div>
+<div id="result" class="result">
+
+<h3>✅ Detection Result</h3>
+
+<p><b>🥬 Vegetable :</b> <span id="vegName">--</span></p>
+
+<p><b>💰 Market Price :</b> <span id="vegPrice">--</span></p>
+
+<p><b>📍 Market :</b> <span id="vegMarket">--</span></p>
+
+<p><b>📈 Trend :</b> <span id="vegTrend">--</span></p>
+
+<p><b>📅 Updated :</b> <span id="vegDate">Today</span></p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Vegetable Detection & Live Market Demo</p>
+
+<p>© 2026 AgriConnect</p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="vegetable.js"></script>
+
+</body>
+</html>

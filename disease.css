@@ -1,0 +1,270 @@
+/* ===== Global ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+
+body{
+
+    background:#f1f8e9;
+    color:#333;
+
+}
+
+
+
+/* ===== Header ===== */
+
+header{
+
+    background:linear-gradient(135deg,#2e7d32,#66bb6a);
+    color:white;
+    text-align:center;
+    padding:25px;
+
+}
+
+
+header h1{
+
+    font-size:35px;
+    margin-bottom:10px;
+
+}
+
+
+header p{
+
+    font-size:18px;
+
+}
+
+
+
+
+/* ===== Container ===== */
+
+.container{
+
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+
+}
+
+
+
+/* ===== Card ===== */
+
+.card{
+
+    background:white;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.12);
+
+}
+
+
+.card h2{
+
+    color:#2e7d32;
+    margin-bottom:20px;
+
+}
+
+
+
+/* ===== Upload ===== */
+
+
+.upload{
+
+    display:inline-block;
+    background:#2e7d32;
+    color:white;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:20px;
+
+}
+
+
+.upload:hover{
+
+    background:#1b5e20;
+
+}
+
+
+
+.upload input{
+
+    display:none;
+
+}
+
+
+
+/* ===== Image Preview ===== */
+
+#previewImage{
+
+    display:block;
+    width:300px;
+    max-width:100%;
+    margin:20px auto;
+    border-radius:12px;
+
+}
+
+
+
+
+/* ===== Select Box ===== */
+
+select{
+
+    width:100%;
+    padding:12px;
+    margin:10px 0 20px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+
+}
+
+
+
+
+/* ===== Buttons ===== */
+
+button{
+
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:13px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+
+}
+
+
+button:hover{
+
+    background:#e68900;
+
+}
+
+
+
+/* ===== Result ===== */
+
+.result{
+
+    display:block;
+
+}
+
+
+
+.result h3{
+
+    color:#33691e;
+    margin:12px 0;
+
+}
+
+
+.result p{
+
+    line-height:1.6;
+
+}
+
+
+
+
+/* ===== Crop Grid ===== */
+
+
+.grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+
+}
+
+
+.grid div{
+
+    background:#f9fff9;
+    padding:20px;
+    border-radius:12px;
+    border-left:5px solid #4caf50;
+
+}
+
+
+
+.grid h3{
+
+    color:#2e7d32;
+    margin-bottom:10px;
+
+}
+
+
+
+/* ===== Footer ===== */
+
+footer{
+
+    background:#2e7d32;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+
+}
+
+
+
+
+/* ===== Mobile Responsive ===== */
+
+
+@media(max-width:600px){
+
+
+header h1{
+
+    font-size:25px;
+
+}
+
+
+.container{
+
+    width:95%;
+
+}
+
+
+.card{
+
+    padding:18px;
+
+}
+
+
+}

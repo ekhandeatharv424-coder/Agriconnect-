@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriConnect</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5fff4;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:18px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+}
+
+nav{
+background:#1b5e20;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:15px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+transition:.3s;
+}
+
+nav a:hover{
+color:yellow;
+}
+
+.hero{
+padding:40px;
+text-align:center;
+background:white;
+}
+
+.hero h1{
+font-size:42px;
+color:#2e7d32;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.search-box{
+margin:20px;
+}
+
+.search-box input{
+padding:12px;
+width:300px;
+border-radius:8px;
+border:1px solid gray;
+}
+
+.search-box button{
+padding:12px 20px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:20px;
+
+padding:40px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:12px;
+
+box-shadow:0 0 10px rgba(0,0,0,.15);
+
+text-align:center;
+
+}
+
+.card h2{
+
+color:#2e7d32;
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+margin-bottom:15px;
+
+}
+
+.card button{
+
+background:#2e7d32;
+
+color:white;
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+footer{
+
+background:#1b5e20;
+
+color:white;
+
+padding:25px;
+
+text-align:center;
+
+margin-top:40px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+🌾 AgriConnect
+
+</header>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="market.html">Market Rates</a>
+
+<a href="weather.html">Weather</a>
+
+<a href="schemes.html">Government Schemes</a>
+
+<a href="disease.html">AI Disease</a>
+
+<a href="contact.html">Contact</a>
+
+<a href="login.html">Farmer Login</a>
+
+</nav>
+
+<section class="hero">
+
+<h1>Welcome Farmer 👨‍🌾</h1>
+
+<p>
+
+Your Smart Farming Assistant
+
+</p>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Crop">
+
+<button onclick="searchData()">
+
+Search
+
+</button>
+
+</div>
+
+<input
+type="file"
+id="cropImage">
+
+<br><br>
+
+<img
+id="preview"
+width="250"
+style="display:none;border-radius:10px;">
+
+<br><br>
+
+<button onclick="detectCrop()">
+
+Detect Crop
+
+</button>
+
+</section>
+
+<section class="cards">
+    <div class="card">
+
+<h2>🌦 Live Weather</h2>
+
+<p>
+
+Check today's weather and forecast.
+
+</p>
+
+<a href="weather.html">
+
+<button>
+
+Open Weather
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💰 Market Prices</h2>
+
+<p>
+
+Check today's live crop prices.
+
+</p>
+
+<a href="market.html">
+
+<button>
+
+Open Market
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🤖 AI Disease Detection</h2>
+
+<p>
+
+Upload crop image and detect disease.
+
+</p>
+
+<a href="disease.html">
+
+<button>
+
+Open AI
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🏛 Government Schemes</h2>
+
+<p>
+
+View latest farmer schemes.
+
+</p>
+
+<a href="schemes.html">
+
+<button>
+
+Open Schemes
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💬 AI Chatbot</h2>
+
+<p>
+
+Ask farming related questions.
+
+</p>
+
+<a href="chatbot.html">
+
+<button>
+
+Open Chatbot
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍🌾 Farmer Login</h2>
+
+<p>
+
+Login to your AgriConnect account.
+
+</p>
+
+<a href="login.html">
+
+<button>
+
+Login
+
+</button>
+
+</a>
+
+</div>
+
+</section>
+<section style="padding:40px;text-align:center;background:#ffffff;">
+
+<h2 style="color:#2e7d32;">📞 Contact Us</h2>
+
+<br>
+
+<p><b>Email:</b> agriconnect@gmail.com</p>
+
+<p><b>Phone:</b> +91 9876543210</p>
+
+<p><b>Location:</b> Maharashtra, India</p>
+
+</section>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>
+Helping Farmers with Technology ❤️
+</p>
+
+<br>
+
+<p>
+
+© 2026 AgriConnect | All Rights Reserved
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

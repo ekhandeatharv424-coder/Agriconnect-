@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect Government Schemes</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef8ee;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+margin-top:15px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:14px;
+font-size:17px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+font-size:17px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b5e20;
+}
+
+.result{
+display:none;
+margin-top:20px;
+padding:20px;
+background:#f4fff4;
+border-left:5px solid green;
+border-radius:10px;
+}
+
+footer{
+margin-top:40px;
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🏛 Government Schemes</h1>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="weather.html">Weather</a>
+
+<a href="cropinfo.html">Crop Info</a>
+
+<a href="fertilizer.html">Fertilizer</a>
+
+<a href="market.html">Market</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<h2>Search Government Scheme</h2>
+
+<input
+type="text"
+id="schemeSearch"
+placeholder="Example : pm kisan">
+
+<button onclick="searchScheme()">
+
+🔍 Search Scheme
+
+</button>
+
+<button onclick="applyScheme()">
+
+🌐 Apply Now
+
+</button>
+
+<button onclick="downloadSchemePDF()">
+
+📄 Download PDF
+
+</button>
+
+<button onclick="resetScheme()">
+
+🔄 Reset
+
+</button>
+
+<div
+id="schemeResult"
+class="result">
+
+<h2>Government Scheme Information</h2>
+
+<p>Search a Scheme.</p>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Government Scheme Information Portal</p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="scheme.js"></script>
+
+</body>
+
+</html>

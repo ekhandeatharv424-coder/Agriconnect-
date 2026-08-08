@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect - Live Weather</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+
+margin:0;
+
+font-family:Arial,sans-serif;
+
+background:#eef8ee;
+
+}
+
+header{
+
+background:#388b3c;
+
+color:rgb(255, 255, 255);
+
+padding:20px;
+
+text-align:center;
+
+}
+
+nav{
+
+background:#25722a;
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+padding:12px;
+
+flex-wrap:wrap;
+
+}
+
+nav a{
+
+color:rgb(255, 255, 255);
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+.container{
+
+max-width:700px;
+
+margin:40px auto;
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 0 15px rgba(255, 255, 255, 0.2);
+
+text-align:center;
+
+}
+
+input{
+
+width:70%;
+
+padding:12px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+font-size:16px;
+
+}
+
+button{
+
+margin-top:15px;
+
+padding:12px 25px;
+
+background:#408843;
+
+color:rgb(255, 255, 255);
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#46974c;
+
+}
+
+.weather-card{
+
+margin-top:30px;
+
+padding:20px;
+
+border-radius:10px;
+
+background:#9eef9e;
+
+}
+
+.weather-card h2{
+
+color:#579c5a;
+
+}
+
+.value{
+
+font-weight:bold;
+
+font-size:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌦️ AgriConnect Live Weather</h1>
+
+</header>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="market.html">Market</a>
+
+<a href="schemes.html">Schemes</a>
+
+<a href="profile.html">Profile</a>
+
+</nav>
+
+<div class="container">
+
+<h2>Check Live Weather</h2>
+
+<p>Enter your city name</p>
+
+<input
+type="text"
+id="cityInput"
+placeholder="Example: Nashik">
+
+<br>
+
+<button onclick="changeCity()">
+
+Search Weather
+
+</button>
+
+<div class="weather-card">
+
+<h2>📍
+<span id="location">
+Loading...
+</span>
+</h2>
+
+<p>
+
+🌡️ Temperature  :
+<span
+id="temperature"
+class="value">
+--
+</span>
+
+</p>
+
+<p>
+
+🌤️  Condition :
+<span
+id="condition"
+class="value">
+--
+</span>
+
+</p>
+<p>
+
+💧 Humidity :
+<span
+id="humidity"
+class="value">
+--
+</span>
+
+</p>
+
+<p>
+
+🌬️ Wind Speed :
+<span
+id="wind"
+class="value">
+--
+</span>
+
+</p>
+
+<br>
+
+<button onclick="getWeather()">
+
+🔄 Refresh Weather
+
+</button>
+
+<br><br>
+
+<a href="dashboard.html">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<footer style="margin-top:40px;background:#2e7d32;color:white;padding:20px;text-align:center;">
+
+<h3>🌾 AgriConnect</h3>
+
+<p>Helping Farmers with Smart Technology</p>
+
+</footer>
+
+<script src="weather.js"></script>
+
+</body>
+
+</html>

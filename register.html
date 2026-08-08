@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect - Register</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌾 AgriConnect Register</h1>
+
+</header>
+
+<section class="hero">
+
+<div class="result">
+
+<h2>Create Account</h2>
+
+<input
+type="text"
+id="name"
+placeholder="Enter Full Name">
+
+<br><br>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email">
+
+<br><br>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<br><br>
+
+<button onclick="registerUser()">
+
+Register
+
+</button>
+
+<br><br>
+
+<p>
+
+Already have an account?
+
+<a href="login.html">
+
+Login Here
+
+</a>
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Helping Farmers with Technology</p>
+
+</footer>
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script>
+
+function registerUser(){
+
+const name =
+document.getElementById("name").value;
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+auth.createUserWithEmailAndPassword(email,password)
+
+.then(function(userCredential){
+
+localStorage.setItem("farmerName",name);
+
+alert("Registration Successful ✅");
+
+window.location.href="login.html";
+
+})
+
+.catch(function(error){
+
+alert(error.message);
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

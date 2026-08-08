@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgriConnect Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef8ee;
+}
+
+header{
+background:#2e7d32;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:30px auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+text-align:center;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h2{
+font-size:40px;
+margin:10px;
+}
+
+.card h3{
+color:#2e7d32;
+margin:10px;
+}
+
+.card p{
+color:#555;
+min-height:45px;
+}
+
+.card button{
+width:100%;
+padding:12px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:17px;
+}
+
+.card button:hover{
+background:#1b5e20;
+}
+
+footer{
+margin-top:50px;
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌾 AgriConnect Dashboard</h1>
+
+<p>Smart Agriculture Management System</p>
+
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<div class="card">
+
+<h2>🌦</h2>
+
+<h3>Weather</h3>
+
+<p>Check Live Weather Forecast</p>
+
+<a href="weather.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🌾</h2>
+
+<h3>Crop Information</h3>
+
+<p>Complete Crop Details</p>
+
+<a href="cropinfo.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🌱</h2>
+
+<h3>Fertilizer Recommendation</h3>
+
+<p>Get best fertilizer suggestion</p>
+
+<a href="fertilizer.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💰</h2>
+
+<h3>Market Prices</h3>
+
+<p>Today's Live Market Rates</p>
+
+<a href="market.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+<div class="card">
+
+<h2>🏛️</h2>
+
+<h3>Government Scheme</h3>
+
+<p>View & Apply for Government Schemes</p>
+
+<a href="scheme.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>👨‍🌾</h2>
+
+<h3>Farmer Profile</h3>
+
+<p>Manage Farmer Information</p>
+
+<a href="profile.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>📞</h2>
+
+<h3>Contact</h3>
+
+<p>Contact AgriConnect Support</p>
+
+<a href="contact.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>📷</h2>
+
+<h3>AI Vegetable Detection</h3>
+
+<p>Upload Vegetable Image & Get Market Price</p>
+
+<a href="vegetable.html">
+
+<button>Open</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🚪</h2>
+
+<h3>Logout</h3>
+
+<p>Logout from AgriConnect</p>
+
+<a href="login.html">
+
+<button>Logout</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🤖</h2>
+
+<h3>AI Chatbot</h3>
+
+<p>Ask Farming Questions</p>
+
+<button onclick="chatbot()">
+
+Open Chatbot
+
+</button>
+
+</div>
+
+<div class="card">
+
+
+<h2>🌿</h2>
+
+
+<h3>AI Crop Disease Detection</h3>
+
+
+<p>Upload crop image and detect possible diseases</p>
+
+
+<a href="disease.html">
+
+
+<button>Open Detection</button>
+
+
+</a>
+
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌾 AgriConnect</h2>
+
+<p>Smart Agriculture Management System</p>
+
+<p>© 2026 AgriConnect | All Rights Reserved</p>
+
+</footer>
+
+<script src="chatbot.js"></script>
+
+</body>
+
+</html>

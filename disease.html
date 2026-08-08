@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop Disease Detection - AgriConnect</title>
+
+<link rel="stylesheet" href="disease.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🌿 AgriConnect</h1>
+
+<p>Smart Crop Disease Detection System</p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>📷 Upload Crop Image</h2>
+
+
+<label class="upload">
+
+Select Crop Image
+
+<input type="file" id="imageInput" accept="image/*">
+
+</label>
+
+
+<img id="previewImage" alt="Crop Preview">
+
+
+
+<h3>Select Crop</h3>
+
+
+<select id="crop">
+
+<option value="">-- Select Crop --</option>
+
+<option value="Tomato">🍅 Tomato</option>
+
+<option value="Potato">🥔 Potato</option>
+
+<option value="Onion">🧅 Onion</option>
+
+<option value="Rice">🌾 Rice</option>
+
+<option value="Wheat">🌾 Wheat</option>
+
+<option value="Cotton">🌱 Cotton</option>
+
+<option value="Soybean">🌿 Soybean</option>
+
+<option value="Chilli">🌶 Chilli</option>
+
+<option value="Banana">🍌 Banana</option>
+
+<option value="Mango">🥭 Mango</option>
+
+<option value="Grapes">🍇 Grapes</option>
+
+<option value="Papaya">🍈 Papaya</option>
+
+
+</select>
+
+
+
+<button onclick="detectDisease()">
+
+🔍 Detect Disease
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card result" id="result">
+
+
+<h2>🌱 Disease Result</h2>
+
+
+<h3 id="diseaseName">
+-
+</h3>
+
+
+<p>
+<b>Crop:</b>
+<span id="resultCrop">-</span>
+</p>
+
+
+<p>
+<b>Confidence:</b>
+<span id="confidence">-</span>
+</p>
+
+
+
+<hr>
+
+
+
+<h3>💊 Medicine Recommendation</h3>
+
+
+<p id="medicine">
+
+-
+
+</p>
+
+
+
+
+<h3>🌾 Prevention Tips</h3>
+
+
+<p id="tips">
+
+-
+
+</p>
+
+
+
+<button onclick="downloadReport()">
+
+📄 Download PDF Report
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>🌾 Supported Crops & Diseases</h2>
+
+
+<div class="grid">
+
+
+<div>
+<h3>🍅 Tomato</h3>
+<p>Early Blight<br>Late Blight<br>Leaf Mold</p>
+</div>
+
+
+
+<div>
+<h3>🥔 Potato</h3>
+<p>Early Blight<br>Late Blight</p>
+</div>
+
+
+
+<div>
+<h3>🌾 Rice</h3>
+<p>Blast Disease<br>Brown Spot</p>
+</div>
+
+
+
+
+<div>
+<h3>🌱 Wheat</h3>
+<p>Rust Disease<br>Powdery Mildew</p>
+</div>
+
+
+
+
+<div>
+<h3>🌶 Chilli</h3>
+<p>Leaf Curl<br>Anthracnose</p>
+</div>
+
+
+
+<div>
+<h3>🍌 Banana</h3>
+<p>Panama Disease<br>Sigatoka</p>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<footer>
+
+© 2026 AgriConnect | Smart Farmer Assistant
+
+</footer>
+
+
+
+<script src="disease.js"></script>
+
+
+</body>
+
+</html>
