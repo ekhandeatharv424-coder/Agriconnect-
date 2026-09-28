@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriConnect</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🌾 AgriConnect</h1>
+    </header>
+
+   <section class="hero" id="home">
+        <div class="search-box">
+
+<input type="text" id="searchInput" placeholder="Search Crop or Scheme">
+
+<button onclick="searchData()">Search</button>
+
+</div>
+
+        <h1>Welcome Farmer 👨‍🌾</h1>
+
+        <p>
+            Upload your crop image and get market price, weather and government schemes.
+        </p>
+
+        <br>
+
+        <input type="file" id="cropImage">
+
+        <br><br>
+
+        <img id="preview"
+             width="250"
+             style="display:none; border-radius:10px;">
+
+        <br><br>
+
+        <button onclick="detectCrop()">Detect Crop</button>
+
+        <div class="result">
+
+            <h2>🌾 Crop : Tomato</h2>
+
+            <h3>💰 Today's Price : ₹2500 / Quintal</h3>
+
+            <h3>📍 Market : Lasalgaon</h3>
+
+            <h3>🌦️ Weather : 28°C</h3>
+
+            <h3>🏛️ Scheme : PM Kisan</h3>
+
+        </div>
+
+    </section>
+<section class="result" id="market">
+
+    <h2>💰 Today's Market Rates</h2>
+
+    <h3>🍅 Tomato : ₹2500 / Quintal</h3>
+
+    <h3>🌾 Wheat : ₹2200 / Quintal</h3>
+
+    <h3>🌽 Maize : ₹1800 / Quintal</h3>
+
+    <h3>🧅 Onion : ₹3000 / Quintal</h3>
+
+    <p>📍 Market: Lasalgaon APMC</p>
+
+    </section>
+    <section class="result" id="schemes"></section>
+
+    <h2>🏛️ Government Schemes For Farmers</h2>
+
+    <h3>🌾 PM Kisan Samman Nidhi Yojana</h3>
+    <p>Financial support for eligible farmers.</p>
+
+    <h3>🚜 Kisan Credit Card Scheme</h3>
+    <p>Easy loan facility for agricultural work.</p>
+
+    <h3>💧 PM Krishi Sinchai Yojana</h3>
+    <p>Support for irrigation and water management.</p>
+
+    <h3>🌱 Soil Health Card Scheme</h3>
+    <p>Provides soil testing and fertilizer guidance.</p>
+
+    <h3>🛒 e-NAM</h3>
+    <p>Online platform for selling agricultural products.</p>
+
+    <h3>⚡ Solar Agriculture Pump Scheme</h3>
+    <p>Solar pump support for farmers.</p>
+
+</section>
+
+<section class="result" id="weather"></section>
+
+    <h2>🌦 Weather Information</h2>
+
+    <h3>📍 Location : Nashik, Maharashtra</h3>
+
+    <h3>🌡 Temperature : 28°C</h3>
+
+    <h3>💧 Humidity : 65%</h3>
+
+    <h3>🌧 Weather Condition : Partly Cloudy</h3>
+
+    <h3>🌬 Wind Speed : 12 km/h</h3>
+
+</section>
+
+<section class="result" id="contact">
+
+    <h2>📞 Contact Us</h2>
+
+    <h3>🌾 AgriConnect Support</h3>
+
+    <p>📧 Email: agriconnect@gmail.com</p>
+
+    <p>📱 Phone: +91 9876543210</p>
+
+    <p>📍 Location: Maharashtra, India</p>
+
+</section>
+    <footer>
+
+        <h2>🌾 AgriConnect</h2>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="#market">Market Rates</a>
+<a href="#schemes">Government Schemes</a>
+<a href="#weather">Weather</a>
+<a href="#contact">Contact</a>
+<a href="login.html">
+<button>👨‍🌾 Farmer Login</button>
+</a>
+
+</nav>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
