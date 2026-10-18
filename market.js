@@ -2,21 +2,12 @@
 // AGRICONNECT - LIVE AGRICULTURAL MARKET
 // ======================================================
 
-// API KEY
 const API_KEY =
-"579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b";
+"579b464db66ec23bdd000001128a8d3c566a491a552c5b8d7693d05c";
 
-// DATA.GOV RESOURCE
 const RESOURCE_ID =
 "9ef84268-d588-465a-a308-a864a43d0070";
 
-// API LIMIT PER REQUEST
-const PAGE_SIZE = 10;
-
-// Number of pages to fetch automatically
-const INITIAL_PAGES = 10;
-
-// Store current records
 let currentRecords = [];
 
 
@@ -26,165 +17,221 @@ let currentRecords = [];
 
 async function searchMarket() {
 
-    const input = document.getElementById("cropSearch");
+    const input =
+        document.getElementById("cropSearch");
 
-    const result = document.getElementById("marketResult");
+    const result =
+        document.getElementById("marketResult");
+
 
     if (!input || !result) {
+
         alert("Market page elements not found.");
         return;
+
     }
 
-    const crop = input.value.trim();
+
+    const crop =
+        input.value.trim();
+
 
     if (crop === "") {
-        alert("Please Enter Crop Name");
+
+        alert("Please enter crop name.");
+        input.focus();
         return;
+
     }
+
+
+    // ==========================================
+    // LOADING
+    // ==========================================
 
     result.style.display = "block";
 
     result.innerHTML = `
-        <div style="text-align:center;padding:25px;">
-            <h2>🔄 Loading Market Data...</h2>
-            <p>Searching multiple markets for <b>${escapeHTML(crop)}</b></p>
+
+        <div style="
+            text-align:center;
+            padding:30px;
+        ">
+
+            <div style="
+                font-size:45px;
+            ">
+                🔄
+            </div>
+
+            <h2>
+                Loading Market Rates...
+            </h2>
+
+            <p>
+                Finding multiple markets for
+                <b>${escapeHTML(crop)}</b>
+            </p>
+
+            <p style="color:#777;">
+                Please wait...
+            </p>
+
         </div>
+
     `;
+
 
     currentRecords = [];
 
+
     try {
 
-        // Fetch multiple pages
-        const allRecords =
-            await fetchMultiplePages(crop, INITIAL_PAGES);
+        // ==========================================
+        // SINGLE API REQUEST
+        // ==========================================
 
-        if (!allRecords || allRecords.length === 0) {
+        const url =
+            `https://api.data.gov.in/resource/${RESOURCE_ID}` +
+            `?api-key=${API_KEY}` +
+            `&format=json` +
+            `&limit=100` +
+            `&filters[commodity]=${encodeURIComponent(crop)}`;
+
+
+        console.log("Market API:", url);
+
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "API Error " + response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log("Market API Response:", data);
+
+
+        if (
+            !data ||
+            !Array.isArray(data.records) ||
+            data.records.length === 0
+        ) {
 
             result.innerHTML = `
-                <div style="padding:25px;text-align:center;">
-                    <h2>❌ No Data Found</h2>
+
+                <div style="
+                    text-align:center;
+                    padding:30px;
+                ">
+
+                    <h2>
+                        ❌ No Market Data Found
+                    </h2>
 
                     <p>
-                        No market data was found for
+                        No market data found for
                         <b>${escapeHTML(crop)}</b>.
                     </p>
 
-                    <p>
-                        Try names such as:
-                        Tomato, Onion, Potato, Wheat, Rice
+                    <p style="color:#777;">
+                        Try:
+                        Tomato, Onion, Potato,
+                        Wheat, Rice, Soybean
                     </p>
+
                 </div>
+
             `;
 
             return;
+
         }
 
-        currentRecords = removeDuplicates(allRecords);
+
+        // ==========================================
+        // REMOVE DUPLICATES
+        // ==========================================
+
+        currentRecords =
+            removeDuplicates(data.records);
+
+
+        // ==========================================
+        // DISPLAY
+        // ==========================================
 
         displayMarketResults(
             crop,
             currentRecords
         );
 
+
     }
 
-    catch (error) {
+    catch(error) {
 
-        console.error("Market API Error:", error);
+        console.error(
+            "Market API Error:",
+            error
+        );
+
 
         result.innerHTML = `
-            <div style="padding:25px;text-align:center;">
 
-                <h2>⚠️ Market API Error</h2>
+            <div style="
+                text-align:center;
+                padding:30px;
+            ">
+
+                <h2>
+                    ⚠️ Market API Error
+                </h2>
 
                 <p>
-                    Unable to retrieve market information.
+                    Market data load होत नाही.
                 </p>
 
-                <p>
-                    Please check your internet connection
-                    and try again.
+                <p style="color:#777;">
+                    Internet connection किंवा
+                    Government API temporarily unavailable.
                 </p>
+
+                <button
+                    onclick="searchMarket()"
+                    style="
+                        padding:12px 25px;
+                        background:#2e7d32;
+                        color:white;
+                        border:none;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    🔄 Try Again
+                </button>
 
             </div>
+
         `;
+
     }
+
 }
 
 
 // ======================================================
-// FETCH MULTIPLE API PAGES
-// ======================================================
-
-async function fetchMultiplePages(crop, numberOfPages) {
-
-    let allRecords = [];
-
-    for (let page = 0; page < numberOfPages; page++) {
-
-        const offset = page * PAGE_SIZE;
-
-        const url =
-            `https://api.data.gov.in/resource/${RESOURCE_ID}` +
-            `?api-key=${API_KEY}` +
-            `&format=json` +
-            `&limit=${PAGE_SIZE}` +
-            `&offset=${offset}` +
-            `&filters[commodity]=${encodeURIComponent(crop)}`;
-
-        try {
-
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                console.log(
-                    "API response error:",
-                    response.status
-                );
-                continue;
-            }
-
-            const data = await response.json();
-
-            if (
-                data &&
-                Array.isArray(data.records)
-            ) {
-
-                allRecords =
-                    allRecords.concat(data.records);
-
-                console.log(
-                    `Page ${page + 1}:`,
-                    data.records.length,
-                    "records"
-                );
-
-                // If fewer than 10 records,
-                // probably reached the end.
-                if (data.records.length < PAGE_SIZE) {
-                    break;
-                }
-            }
-
-        }
-
-        catch (error) {
-
-            console.log(
-                `Error loading page ${page + 1}`,
-                error
-            );
-        }
-    }
-
-    return allRecords;
-}
-
-
-// ======================================================
-// REMOVE DUPLICATE MARKET RECORDS
+// REMOVE DUPLICATES
 // ======================================================
 
 function removeDuplicates(records) {
@@ -193,76 +240,118 @@ function removeDuplicates(records) {
 
     const seen = new Set();
 
-    records.forEach(item => {
+
+    records.forEach(function(item) {
 
         const key =
             `${item.market || ""}|` +
             `${item.district || ""}|` +
             `${item.state || ""}|` +
+            `${item.variety || ""}|` +
             `${item.arrival_date || ""}`;
+
 
         if (!seen.has(key)) {
 
             seen.add(key);
 
             unique.push(item);
+
         }
+
     });
 
+
     return unique;
+
 }
 
 
 // ======================================================
-// DISPLAY MARKET RESULTS
+// DISPLAY MULTIPLE MARKET RESULTS
 // ======================================================
 
-function displayMarketResults(crop, records) {
+function displayMarketResults(
+    crop,
+    records
+) {
 
     const result =
         document.getElementById("marketResult");
 
-    let html = "";
 
-    html += `
-        <div class="market-header">
+    let html = `
 
-            <h2>🌾 ${escapeHTML(crop.toUpperCase())}</h2>
+        <div style="
+            background:#e8f5e9;
+            padding:20px;
+            border-radius:14px;
+            margin-bottom:20px;
+            text-align:center;
+        ">
 
-            <p>
-                📊 Markets Found:
+            <h2 style="
+                color:#1b5e20;
+                margin:0 0 10px;
+            ">
+
+                🌾 ${escapeHTML(
+                    crop.toUpperCase()
+                )}
+
+            </h2>
+
+            <p style="margin:0;">
+
+                📊
                 <b>${records.length}</b>
+                market records found
+
             </p>
 
         </div>
+
     `;
 
 
-    records.forEach((item, index) => {
+    // ==================================================
+    // MARKET CARDS
+    // ==================================================
+
+    records.forEach(function(item, index) {
+
 
         const market =
-            item.market || "Not Available";
+            item.market || "Market Not Available";
+
 
         const district =
-            item.district || "Not Available";
+            item.district || "District Not Available";
+
 
         const state =
-            item.state || "Not Available";
+            item.state || "State Not Available";
+
 
         const variety =
             item.variety || "Not Available";
 
+
         const grade =
             item.grade || "Not Available";
+
 
         const minPrice =
             item.min_price || "N/A";
 
+
         const maxPrice =
             item.max_price || "N/A";
 
+
         const modalPrice =
             item.modal_price || "N/A";
+
 
         const date =
             item.arrival_date || "Not Available";
@@ -270,80 +359,196 @@ function displayMarketResults(crop, records) {
 
         html += `
 
-        <div class="market-card"
-             style="
-                background:#ffffff;
+            <div style="
+                background:white;
                 margin:15px 0;
-                padding:20px;
-                border-radius:14px;
-                box-shadow:0 4px 15px rgba(0,0,0,0.10);
-                border-left:5px solid #2e7d32;
-             ">
+                padding:22px;
+                border-radius:15px;
+                box-shadow:0 4px 15px
+                    rgba(0,0,0,0.10);
+                border-left:6px solid #2e7d32;
+            ">
 
-            <h3>
-                📍 ${escapeHTML(market)}
-            </h3>
 
-            <p>
-                <b>🏙 District:</b>
-                ${escapeHTML(district)}
-            </p>
+                <h3 style="
+                    color:#1b5e20;
+                    margin-top:0;
+                ">
 
-            <p>
-                <b>🌎 State:</b>
-                ${escapeHTML(state)}
-            </p>
+                    📍 ${index + 1}.
+                    ${escapeHTML(market)}
 
-            <p>
-                <b>🌱 Variety:</b>
-                ${escapeHTML(variety)}
-            </p>
+                </h3>
 
-            <p>
-                <b>⭐ Grade:</b>
-                ${escapeHTML(grade)}
-            </p>
 
-            <hr>
+                <p>
 
-            <p>
-                <b>💰 Minimum Price:</b>
-                ₹${escapeHTML(minPrice)}
-            </p>
+                    🏙️
+                    <b>District:</b>
+                    ${escapeHTML(district)}
 
-            <p>
-                <b>💰 Maximum Price:</b>
-                ₹${escapeHTML(maxPrice)}
-            </p>
+                </p>
 
-            <p>
-                <b>💰 Modal Price:</b>
-                ₹${escapeHTML(modalPrice)}
-            </p>
 
-            <p>
-                <b>📅 Arrival Date:</b>
-                ${escapeHTML(date)}
-            </p>
+                <p>
 
-        </div>
+                    🌎
+                    <b>State:</b>
+                    ${escapeHTML(state)}
+
+                </p>
+
+
+                <p>
+
+                    🌱
+                    <b>Variety:</b>
+                    ${escapeHTML(variety)}
+
+                </p>
+
+
+                <p>
+
+                    ⭐
+                    <b>Grade:</b>
+                    ${escapeHTML(grade)}
+
+                </p>
+
+
+                <hr>
+
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:
+                    repeat(auto-fit,minmax(150px,1fr));
+                    gap:10px;
+                ">
+
+
+                    <div style="
+                        background:#f1f8e9;
+                        padding:15px;
+                        border-radius:10px;
+                    ">
+
+                        <small>
+                            Minimum Price
+                        </small>
+
+                        <br>
+
+                        <b style="
+                            color:#2e7d32;
+                            font-size:18px;
+                        ">
+
+                            ₹${escapeHTML(
+                                minPrice
+                            )}
+
+                        </b>
+
+                    </div>
+
+
+                    <div style="
+                        background:#fff8e1;
+                        padding:15px;
+                        border-radius:10px;
+                    ">
+
+                        <small>
+                            Modal Price
+                        </small>
+
+                        <br>
+
+                        <b style="
+                            color:#ef6c00;
+                            font-size:18px;
+                        ">
+
+                            ₹${escapeHTML(
+                                modalPrice
+                            )}
+
+                        </b>
+
+                    </div>
+
+
+                    <div style="
+                        background:#ffebee;
+                        padding:15px;
+                        border-radius:10px;
+                    ">
+
+                        <small>
+                            Maximum Price
+                        </small>
+
+                        <br>
+
+                        <b style="
+                            color:#c62828;
+                            font-size:18px;
+                        ">
+
+                            ₹${escapeHTML(
+                                maxPrice
+                            )}
+
+                        </b>
+
+                    </div>
+
+
+                </div>
+
+
+                <p style="
+                    margin-bottom:0;
+                    margin-top:15px;
+                    color:#666;
+                ">
+
+                    📅
+                    <b>Arrival Date:</b>
+                    ${escapeHTML(date)}
+
+                </p>
+
+
+            </div>
 
         `;
 
     });
 
 
+    // ==================================================
+    // FOOTER
+    // ==================================================
+
     html += `
 
         <div style="
             text-align:center;
             padding:20px;
-            margin-top:20px;
+            color:#666;
         ">
 
-            <p style="color:#555;">
-                Showing available records returned
-                by the Government Market API.
+            <p>
+                🌾 Data provided by
+                Government Market API
+            </p>
+
+            <p style="font-size:13px;">
+                Showing records returned by
+                the official market dataset.
             </p>
 
         </div>
@@ -352,11 +557,12 @@ function displayMarketResults(crop, records) {
 
 
     result.innerHTML = html;
+
 }
 
 
 // ======================================================
-// RESET
+// RESET MARKET
 // ======================================================
 
 function resetMarket() {
@@ -364,48 +570,74 @@ function resetMarket() {
     const input =
         document.getElementById("cropSearch");
 
+
     const result =
         document.getElementById("marketResult");
 
+
     if (input) {
+
         input.value = "";
+
     }
+
 
     if (result) {
 
-        result.style.display = "none";
+        result.style.display = "block";
+
 
         result.innerHTML = `
-            <h2>Market Information</h2>
 
-            <p>
-                Search a crop to view market details.
-            </p>
+            <div style="
+                text-align:center;
+                padding:25px;
+            ">
+
+                <h2>
+                    💰 Market Information
+                </h2>
+
+                <p>
+                    Search a crop to view
+                    multiple market rates.
+                </p>
+
+            </div>
+
         `;
+
     }
 
+
     currentRecords = [];
+
 }
 
 
 // ======================================================
-// ENTER KEY SUPPORT
+// ENTER KEY
 // ======================================================
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
         const input =
-            document.getElementById("cropSearch");
+            document.getElementById(
+                "cropSearch"
+            );
+
 
         if (input) {
 
             input.addEventListener(
                 "keypress",
-                function (event) {
+                function(event) {
 
-                    if (event.key === "Enter") {
+                    if (
+                        event.key === "Enter"
+                    ) {
 
                         searchMarket();
 
@@ -427,23 +659,28 @@ document.addEventListener(
 async function downloadMarketPDF() {
 
     const result =
-        document.getElementById("marketResult");
+        document.getElementById(
+            "marketResult"
+        );
+
 
     if (
         !result ||
-        result.innerText.includes("Search a crop")
+        currentRecords.length === 0
     ) {
 
         alert(
-            "Please search a crop first."
+            "Please search market first."
         );
 
         return;
+
     }
 
 
     if (
-        typeof window.jspdf === "undefined"
+        typeof window.jspdf ===
+        "undefined"
     ) {
 
         alert(
@@ -451,11 +688,13 @@ async function downloadMarketPDF() {
         );
 
         return;
+
     }
 
 
     const { jsPDF } =
         window.jspdf;
+
 
     const pdf =
         new jsPDF();
@@ -473,32 +712,59 @@ async function downloadMarketPDF() {
     pdf.setFontSize(10);
 
 
-    const text =
-        result.innerText;
+    let y = 32;
 
 
-    const lines =
-        pdf.splitTextToSize(
-            text,
-            180
-        );
+    currentRecords.forEach(
+        function(item, index) {
+
+            const text =
+                `${index + 1}. ${item.market || "N/A"} | ` +
+                `${item.district || "N/A"} | ` +
+                `Min: ₹${item.min_price || "N/A"} | ` +
+                `Modal: ₹${item.modal_price || "N/A"} | ` +
+                `Max: ₹${item.max_price || "N/A"}`;
 
 
-    pdf.text(
-        lines,
-        15,
-        35
+            const lines =
+                pdf.splitTextToSize(
+                    text,
+                    180
+                );
+
+
+            if (y > 270) {
+
+                pdf.addPage();
+
+                y = 20;
+
+            }
+
+
+            pdf.text(
+                lines,
+                15,
+                y
+            );
+
+
+            y +=
+                8 * lines.length;
+
+        }
     );
 
 
     pdf.save(
         "AgriConnect_Market_Report.pdf"
     );
+
 }
 
 
 // ======================================================
-// AUTOCOMPLETE CROPS
+// CROP AUTOCOMPLETE
 // ======================================================
 
 const cropSuggestions = [
@@ -534,12 +800,13 @@ const cropSuggestions = [
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
         const input =
             document.getElementById(
                 "cropSearch"
             );
+
 
         if (!input) return;
 
@@ -561,15 +828,17 @@ document.addEventListener(
 
 
         cropSuggestions.forEach(
-            function (crop) {
+            function(crop) {
 
                 const option =
                     document.createElement(
                         "option"
                     );
 
+
                 option.value =
                     crop;
+
 
                 dataList.appendChild(
                     option
@@ -588,7 +857,7 @@ document.addEventListener(
 
 
 // ======================================================
-// SECURITY - HTML ESCAPE
+// HTML ESCAPE
 // ======================================================
 
 function escapeHTML(value) {
@@ -629,4 +898,5 @@ function escapeHTML(value) {
             /'/g,
             "&#039;"
         );
+
 }
